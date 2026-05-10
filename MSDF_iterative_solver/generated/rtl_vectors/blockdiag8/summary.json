@@ -1,0 +1,142 @@
+{
+  "num_clusters": 2,
+  "num_rows": 4,
+  "degree": 4,
+  "bit_width": 8,
+  "bound_width": 13,
+  "coeff_width": 8,
+  "acc_width": 24,
+  "block_size": 2,
+  "num_blocks": 2,
+  "data_width": 11,
+  "template_memh": "MSDF_iterative_solver/generated/rtl_vectors/blockdiag8/templates.memh",
+  "cert_memh": "MSDF_iterative_solver/generated/rtl_vectors/blockdiag8/cert_params.memh",
+  "clusters": [
+    {
+      "x_by_term": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1
+        ]
+      ],
+      "sum_p_rows": [
+        124,
+        124,
+        124,
+        124
+      ],
+      "sum_n_rows": [
+        80,
+        80,
+        80,
+        80
+      ],
+      "abs_upper_rows": [
+        45,
+        45,
+        45,
+        45
+      ],
+      "block_bounds": [
+        45,
+        45
+      ],
+      "eta": 3,
+      "max_error": 135,
+      "certified": 0,
+      "packed": {
+        "x0_p": 15,
+        "x1_p": 15,
+        "x2_p": 0,
+        "x3_p": 9,
+        "sum_p_rows": 1065672237180,
+        "sum_n_rows": 687530475600,
+        "abs_upper_rows": 24742031892525,
+        "block_bounds": 368685
+      }
+    },
+    {
+      "x_by_term": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1
+        ]
+      ],
+      "sum_p_rows": [
+        124,
+        124,
+        124,
+        124
+      ],
+      "sum_n_rows": [
+        80,
+        80,
+        80,
+        80
+      ],
+      "abs_upper_rows": [
+        45,
+        45,
+        45,
+        45
+      ],
+      "block_bounds": [
+        45,
+        45
+      ],
+      "eta": 3,
+      "max_error": 135,
+      "certified": 0,
+      "packed": {
+        "x0_p": 15,
+        "x1_p": 15,
+        "x2_p": 0,
+        "x3_p": 9,
+        "sum_p_rows": 1065672237180,
+        "sum_n_rows": 687530475600,
+        "abs_upper_rows": 24742031892525,
+        "block_bounds": 368685
+      }
+    }
+  ]
+}

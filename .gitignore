@@ -1,0 +1,40 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Temporary simulation products
+*.vvp
+*.vcd
+*.fst
+
+# Logs
+logs/
+*.log
+*.jou
+*.str
+*.tmp
+
+# Vivado/Xilinx generated work directories and build artifacts
+.Xil/
+*.cache/
+*.runs/
+*.sim/
+*.hw/
+*.ip_user_files/
+*.gen/
+*.dcp
+*.bit
+*.ltx
+*.wdb
+*.wcfg
+*.xsa
+*.pb
+
+# Solver generated implementation folders are copied locally but not tracked.
+MSDF_iterative_solver/generated/vivado_*/
+
+# Keep reproducibility fixtures and compact generated reports trackable.
+!MSDF_iterative_solver/generated/*.md
+!MSDF_iterative_solver/generated/*.json
+!MSDF_iterative_solver/generated/*.memh
+!MSDF_iterative_solver/generated/rtl_vectors/**

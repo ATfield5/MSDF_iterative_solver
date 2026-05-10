@@ -1,0 +1,1317 @@
+{
+  "frac_bits": 6,
+  "bit_width": 8,
+  "max_terms": 4,
+  "fixed_degree": 4,
+  "n": 8,
+  "summary": {
+    "total_nnz": 20,
+    "avg_degree": 2.5,
+    "max_degree": 3,
+    "avg_terms_full": 1.6,
+    "avg_terms_kept": 1.6,
+    "dropped_terms_total": 0
+  },
+  "rows": [
+    {
+      "row": 0,
+      "degree": 2,
+      "terms": [
+        {
+          "col": 0,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 1,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 0,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    },
+    {
+      "row": 1,
+      "degree": 3,
+      "terms": [
+        {
+          "col": 0,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 1,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 2,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 0,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 1,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 2,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    },
+    {
+      "row": 2,
+      "degree": 3,
+      "terms": [
+        {
+          "col": 1,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 2,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 3,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 2,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 3,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    },
+    {
+      "row": 3,
+      "degree": 2,
+      "terms": [
+        {
+          "col": 2,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 3,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 2,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 3,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    },
+    {
+      "row": 4,
+      "degree": 2,
+      "terms": [
+        {
+          "col": 4,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 5,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 4,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 5,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    },
+    {
+      "row": 5,
+      "degree": 3,
+      "terms": [
+        {
+          "col": 4,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 5,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 6,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 4,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 6,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    },
+    {
+      "row": 6,
+      "degree": 3,
+      "terms": [
+        {
+          "col": 5,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 6,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 7,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 5,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 6,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 7,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    },
+    {
+      "row": 7,
+      "degree": 2,
+      "terms": [
+        {
+          "col": 6,
+          "value": 0.1,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ],
+          "dropped_terms": 0
+        },
+        {
+          "col": 7,
+          "value": 0.5,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "csd_terms_full": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ],
+          "dropped_terms": 0
+        }
+      ],
+      "fixed_degree_terms": [
+        {
+          "valid": 1,
+          "col": 6,
+          "quant": 6,
+          "rail": {
+            "vec_p": "00000110",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": -1,
+              "shift": 1
+            },
+            {
+              "sign": 1,
+              "shift": 3
+            }
+          ]
+        },
+        {
+          "valid": 1,
+          "col": 7,
+          "quant": 32,
+          "rail": {
+            "vec_p": "00100000",
+            "vec_n": "00000000"
+          },
+          "template_terms": [
+            {
+              "sign": 1,
+              "shift": 5
+            }
+          ]
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        },
+        {
+          "valid": 0,
+          "col": 0,
+          "quant": 0,
+          "rail": {
+            "vec_p": "00000000",
+            "vec_n": "00000000"
+          },
+          "template_terms": []
+        }
+      ],
+      "bias": {
+        "value": 0.1,
+        "quant": 6,
+        "rail": {
+          "vec_p": "0000000110",
+          "vec_n": "0000000000"
+        },
+        "csd_terms_full": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "template_terms": [
+          {
+            "sign": -1,
+            "shift": 1
+          },
+          {
+            "sign": 1,
+            "shift": 3
+          }
+        ],
+        "dropped_terms": 0
+      }
+    }
+  ]
+}

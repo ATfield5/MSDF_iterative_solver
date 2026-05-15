@@ -3,7 +3,7 @@
 Purpose: collect the current cycle/throughput evidence for P1-P4 and CPU.
 Rows marked `synth-only` or `CPU measured` must not be mixed with routed FPGA rows.
 
-- git commit: `24bdc91531326314d71a18b4efff580e9bdbf7ae`
+- git commit: `85344f9ced19e368576ff08d7f5cdb1b033b8a60`
 - hardware cycle-model clock: `200 MHz`
 
 | entry | scope | degree | iterations | cycles | cycles/iter | iter/s @200MHz | Gterm/s @200MHz | status |

@@ -2,7 +2,7 @@
 
 Purpose: collect current U55C implementation evidence.  This report separates routed rows from synth-only rows.
 
-- git commit: `24bdc91531326314d71a18b4efff580e9bdbf7ae`
+- git commit: `85344f9ced19e368576ff08d7f5cdb1b033b8a60`
 - device: `xcu55c-fsvh2892-2L-e`
 - Vivado/Vitis: `2023.2`
 - clock target: `5 ns`

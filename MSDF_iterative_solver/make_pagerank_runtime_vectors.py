@@ -25,14 +25,94 @@ from typing import Dict, List
 
 import numpy as np
 
-from make_jacobi32_blockdiag_full_digit_runtime_vectors import (
-    conv_cluster_iteration,
-)
 from run_iter_rtl_vector_gen import pack_fields, write_scalar_memh
 
 
 def run(cmd: List[str]) -> None:
     subprocess.run(cmd, check=True)
+
+
+def rail_value(rail: Dict[str, str]) -> int:
+    return int(rail["vec_p"], 2) - int(rail["vec_n"], 2)
+
+
+def saturate_unsigned(value: int, width: int) -> int:
+    if value <= 0:
+        return 0
+    return min(value, (1 << width) - 1)
+
+
+def conv_cluster_iteration(
+    rows: List[Dict[str, object]],
+    cert_cluster: Dict[str, object],
+    old_p_global: List[int],
+    old_n_global: List[int],
+    cluster_base: int,
+    num_rows: int,
+    degree: int,
+    data_width: int,
+    bound_width: int,
+    block_size: int,
+    num_blocks: int,
+    tail_bound: int,
+) -> Dict[str, object]:
+    """Conventional full-word affine step used by PageRank vector generation."""
+
+    state_p_rows: List[int] = []
+    state_n_rows: List[int] = []
+    abs_upper_rows: List[int] = []
+    bound_max = (1 << bound_width) - 1
+
+    for local_row, row in enumerate(rows):
+        row_sum = rail_value(row["bias"]["rail"])
+        for term in row["fixed_degree_terms"][:degree]:
+            if not int(term["valid"]):
+                continue
+            src_global = int(term["col"])
+            state_term = int(old_p_global[src_global]) - int(old_n_global[src_global])
+            coeff_term = rail_value(term["rail"])
+            row_sum += coeff_term * state_term
+
+        old_idx = cluster_base + local_row
+        old_state = int(old_p_global[old_idx]) - int(old_n_global[old_idx])
+        abs_upper_rows.append(min(abs(row_sum - old_state) + int(tail_bound), bound_max))
+
+        if row_sum >= 0:
+            state_p_rows.append(saturate_unsigned(row_sum, data_width))
+            state_n_rows.append(0)
+        else:
+            state_p_rows.append(0)
+            state_n_rows.append(saturate_unsigned(-row_sum, data_width))
+
+    block_bounds: List[int] = []
+    for block_idx in range(num_blocks):
+        start = block_idx * block_size
+        stop = min(start + block_size, num_rows)
+        block_bounds.append(max(abs_upper_rows[start:stop]))
+
+    weights = [int(v) for v in cert_cluster["block_weights"]]
+    eta = int(cert_cluster["eta"])
+    max_error = 0
+    for row_idx in range(num_rows):
+        row_error = 0
+        for block_idx in range(num_blocks):
+            row_error += block_bounds[block_idx] * weights[row_idx * num_blocks + block_idx]
+        max_error = max(max_error, row_error)
+
+    return {
+        "state_p_rows": state_p_rows,
+        "state_n_rows": state_n_rows,
+        "abs_upper_rows": abs_upper_rows,
+        "block_bounds": block_bounds,
+        "max_error": max_error,
+        "certified": int(max_error <= eta),
+        "packed": {
+            "state_p_rows": pack_fields(state_p_rows, data_width),
+            "state_n_rows": pack_fields(state_n_rows, data_width),
+            "abs_upper_rows": pack_fields(abs_upper_rows, bound_width),
+            "block_bounds": pack_fields(block_bounds, bound_width),
+        },
+    }
 
 
 def build_pagerank_matrix(

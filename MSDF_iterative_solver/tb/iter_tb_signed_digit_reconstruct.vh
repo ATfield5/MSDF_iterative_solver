@@ -1,8 +1,8 @@
 // Testbench helper: reconstruct an MSB-first signed-digit rail word.
 //
-// The solver-native mode3 state bank stores signed-digit p/n traces.  Existing
-// Jacobi fixtures store magnitude rail golden words, so mode3 tests must compare
-// numerical values instead of raw p/n bit patterns.
+// Current PageRank fixtures store signed-digit p/n traces. Testbenches compare
+// numerical values instead of raw p/n bit patterns when online digit choices
+// are equivalent but not bit-identical.
 
 function automatic signed [31:0] iter_tb_signed_digit_value;
     input [DATA_WIDTH-1:0] word_p;

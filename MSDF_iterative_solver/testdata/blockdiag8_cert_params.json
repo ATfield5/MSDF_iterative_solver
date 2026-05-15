@@ -1,6 +1,0 @@
-{
-  "clusters": [
-    {"block_weights": [1, 2, 2, 1, 1, 1, 3, 0], "eta": 3},
-    {"block_weights": [1, 2, 2, 1, 1, 1, 3, 0], "eta": 3}
-  ]
-}

@@ -42,11 +42,6 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
 `else
     localparam integer PRIOR_TOLERANCE = 4;
 `endif
-`ifdef PRIOR_WAVEFRONT_USE_MMA4_VALUE
-    localparam integer USE_MMA4_FRAC_CORE = `PRIOR_WAVEFRONT_USE_MMA4_VALUE;
-`else
-    localparam integer USE_MMA4_FRAC_CORE = 0;
-`endif
 
 `include "iter_tb_signed_digit_reconstruct.vh"
 
@@ -134,7 +129,6 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
         .bias_width(BIAS_WIDTH),
         .src_idx_width(SRC_IDX_WIDTH),
         .capture_unit(0),
-        .use_mma4_frac_core(USE_MMA4_FRAC_CORE),
         .digit_idx_width(DIGIT_IDX_WIDTH)
     ) dut (
         .i_clk(i_clk),
@@ -289,7 +283,7 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
             end
         end
 
-        $display("PASS tb_iter_prior_online_mma8_global_wavefront_top use_mma4=%0d", USE_MMA4_FRAC_CORE);
+        $display("PASS tb_iter_prior_online_mma8_global_wavefront_top");
         $display("COUNTERS prior_wavefront K=%0d total=%0d capture=%0d stage_counts=%h overlap=%b",
             NUM_STAGES,
             cycle_count,

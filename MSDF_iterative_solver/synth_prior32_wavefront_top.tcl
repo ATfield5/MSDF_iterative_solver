@@ -25,7 +25,6 @@ set data_width [getenv_default MSDF_DATA_WIDTH 32]
 set bias_width [getenv_default MSDF_BIAS_WIDTH 31]
 set src_idx_width [getenv_default MSDF_SRC_IDX_WIDTH 5]
 set capture_unit [getenv_default MSDF_CAPTURE_UNIT 0]
-set use_mma4_frac_core [getenv_default MSDF_USE_MMA4_FRAC_CORE 0]
 
 set tag [format "prior32_top%s_part%s_k%s_rows%s_deg%s_bw%s_data%s_bias%s_ooc%s_clk%s_route%s" \
     $top_name $part $num_stages $num_rows $degree $bit_width $data_width \
@@ -60,8 +59,6 @@ read_verilog \
     [file join $orig_src_dir MSDF_ADD.v] \
     [file join $orig_src_dir MSDF_MUL_ADD_8.v] \
     [file join $prior_rtl_dir MSDF_MUL_ADD_32_NATIVE.v] \
-    [file join $prior_rtl_dir iter_pagerank_online_mma4_frac_core.v] \
-    [file join $prior_rtl_dir iter_pagerank_online_mma4_frac_stage_cluster.v] \
     [file join $prior_rtl_dir iter_prior_online_mma8_row_kernel.v] \
     [file join $prior_rtl_dir iter_prior_online_mma32_row_kernel.v] \
     [file join $prior_rtl_dir iter_prior_online_mma32_native_row_kernel.v] \
@@ -78,8 +75,7 @@ set generic_args [list \
     data_width=$data_width \
     bias_width=$bias_width \
     src_idx_width=$src_idx_width \
-    capture_unit=$capture_unit \
-    use_mma4_frac_core=$use_mma4_frac_core]
+    capture_unit=$capture_unit]
 
 if {$run_ooc != 0} {
     synth_design -top $top_name -part $part -mode out_of_context -generic $generic_args

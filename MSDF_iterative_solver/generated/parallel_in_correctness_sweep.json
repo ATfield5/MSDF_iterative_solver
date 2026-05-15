@@ -1,0 +1,28 @@
+{
+  "git_commit": "24bdc91531326314d71a18b4efff580e9bdbf7ae",
+  "p3_vs_p4_max_abs_raw": "31334310",
+  "p3_vs_p4_sum_abs_raw": "1002697920",
+  "rows": [
+    {
+      "entry": "P2 parallel-in online wavefront",
+      "evidence": "parallel_in_fractional_eval.md",
+      "status": "PASS"
+    },
+    {
+      "entry": "P3 feedback loop",
+      "evidence": "parallel_in_fractional_eval.md",
+      "status": "PASS"
+    },
+    {
+      "entry": "P4 conventional DSP-MAC",
+      "evidence": "parallel_in_fractional_eval.md",
+      "status": "PASS"
+    },
+    {
+      "entry": "E1 bound sweep",
+      "evidence": "parallel_in_bound_sweep.json",
+      "status": "PASS"
+    }
+  ],
+  "scope": "RTL/model correctness summary"
+}

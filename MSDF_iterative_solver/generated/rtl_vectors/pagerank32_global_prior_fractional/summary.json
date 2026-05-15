@@ -14,8 +14,8 @@
   "acc_width": 24,
   "l1_eta": 64,
   "tail_bound": 1,
-  "template_memh": "MSDF_iterative_solver/generated/rtl_vectors/pagerank32_global_prior_fractional/templates.memh",
-  "cert_memh": "MSDF_iterative_solver/generated/rtl_vectors/pagerank32_global_prior_fractional/cert_params.memh",
+  "template_memh": "/home/sy/FPGA/Online_Mul_Add/MSDF_iterative_solver/generated/rtl_vectors/pagerank32_global_prior_fractional/templates.memh",
+  "cert_memh": "/home/sy/FPGA/Online_Mul_Add/MSDF_iterative_solver/generated/rtl_vectors/pagerank32_global_prior_fractional/cert_params.memh",
   "graph": {
     "graph": "circulant_bounded_degree",
     "n": 32,

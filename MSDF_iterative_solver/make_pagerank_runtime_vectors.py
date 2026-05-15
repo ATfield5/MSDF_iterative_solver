@@ -51,8 +51,11 @@ def build_pagerank_matrix(
     # Deterministic bounded-degree graph.  Source j points to
     # j + offsets[t], so row i receives from i - offsets[t].
     base_offsets = [0, 1, 5, 13, 17, 23, 29, 31]
-    offsets = [base_offsets[i] % n for i in range(degree)]
-    if len(set(offsets)) != degree:
+    if degree <= len(base_offsets):
+        offsets = [base_offsets[i] % n for i in range(degree)]
+        if len(set(offsets)) != degree:
+            offsets = list(range(degree))
+    else:
         offsets = list(range(degree))
 
     ideal_coeff = beta / float(degree)

@@ -1,0 +1,5085 @@
+{
+  "fixture": "pagerank32_global_parallel_in_fractional_deg8",
+  "num_clusters": 8,
+  "num_rows": 4,
+  "total_rows": 32,
+  "degree": 8,
+  "num_iters": 8,
+  "bit_width": 14,
+  "data_width": 16,
+  "bias_width": 16,
+  "frac_bits": 15,
+  "online_delay": 2,
+  "derived_delay": 2,
+  "conv_product_shift": 16,
+  "bound_width": 16,
+  "coeff_width": 8,
+  "acc_width": 64,
+  "l1_eta": 64,
+  "linf_eta": 1,
+  "termination_norm": "linf",
+  "termination_condition": "max_i |r_i(k+1)-r_i(k)| <= 2^-q, represented as <= 1 raw LSB",
+  "tail_bound": 1,
+  "template_memh": "/home/sy/FPGA/Online_Mul_Add/MSDF_iterative_solver/generated/rtl_vectors/paper_parallel_in_bound_sweep/deg8_data16_beta0p95/templates.memh",
+  "cert_memh": "/home/sy/FPGA/Online_Mul_Add/MSDF_iterative_solver/generated/rtl_vectors/paper_parallel_in_bound_sweep/deg8_data16_beta0p95/cert_params.memh",
+  "graph": {
+    "graph": "circulant_bounded_degree",
+    "n": 32,
+    "degree": 8,
+    "beta": 0.95,
+    "offsets": [
+      0,
+      1,
+      5,
+      13,
+      17,
+      23,
+      29,
+      31
+    ],
+    "ideal_coeff": 0.11875,
+    "coeff_quant": 3891,
+    "coeff_value": 0.118743896484375,
+    "teleport_lsb": 51,
+    "teleport_value": 0.001556396484375,
+    "incoming_sources": [
+      [
+        0,
+        31,
+        27,
+        19,
+        15,
+        9,
+        3,
+        1
+      ],
+      [
+        1,
+        0,
+        28,
+        20,
+        16,
+        10,
+        4,
+        2
+      ],
+      [
+        2,
+        1,
+        29,
+        21,
+        17,
+        11,
+        5,
+        3
+      ],
+      [
+        3,
+        2,
+        30,
+        22,
+        18,
+        12,
+        6,
+        4
+      ],
+      [
+        4,
+        3,
+        31,
+        23,
+        19,
+        13,
+        7,
+        5
+      ],
+      [
+        5,
+        4,
+        0,
+        24,
+        20,
+        14,
+        8,
+        6
+      ],
+      [
+        6,
+        5,
+        1,
+        25,
+        21,
+        15,
+        9,
+        7
+      ],
+      [
+        7,
+        6,
+        2,
+        26,
+        22,
+        16,
+        10,
+        8
+      ],
+      [
+        8,
+        7,
+        3,
+        27,
+        23,
+        17,
+        11,
+        9
+      ],
+      [
+        9,
+        8,
+        4,
+        28,
+        24,
+        18,
+        12,
+        10
+      ],
+      [
+        10,
+        9,
+        5,
+        29,
+        25,
+        19,
+        13,
+        11
+      ],
+      [
+        11,
+        10,
+        6,
+        30,
+        26,
+        20,
+        14,
+        12
+      ],
+      [
+        12,
+        11,
+        7,
+        31,
+        27,
+        21,
+        15,
+        13
+      ],
+      [
+        13,
+        12,
+        8,
+        0,
+        28,
+        22,
+        16,
+        14
+      ],
+      [
+        14,
+        13,
+        9,
+        1,
+        29,
+        23,
+        17,
+        15
+      ],
+      [
+        15,
+        14,
+        10,
+        2,
+        30,
+        24,
+        18,
+        16
+      ],
+      [
+        16,
+        15,
+        11,
+        3,
+        31,
+        25,
+        19,
+        17
+      ],
+      [
+        17,
+        16,
+        12,
+        4,
+        0,
+        26,
+        20,
+        18
+      ],
+      [
+        18,
+        17,
+        13,
+        5,
+        1,
+        27,
+        21,
+        19
+      ],
+      [
+        19,
+        18,
+        14,
+        6,
+        2,
+        28,
+        22,
+        20
+      ],
+      [
+        20,
+        19,
+        15,
+        7,
+        3,
+        29,
+        23,
+        21
+      ],
+      [
+        21,
+        20,
+        16,
+        8,
+        4,
+        30,
+        24,
+        22
+      ],
+      [
+        22,
+        21,
+        17,
+        9,
+        5,
+        31,
+        25,
+        23
+      ],
+      [
+        23,
+        22,
+        18,
+        10,
+        6,
+        0,
+        26,
+        24
+      ],
+      [
+        24,
+        23,
+        19,
+        11,
+        7,
+        1,
+        27,
+        25
+      ],
+      [
+        25,
+        24,
+        20,
+        12,
+        8,
+        2,
+        28,
+        26
+      ],
+      [
+        26,
+        25,
+        21,
+        13,
+        9,
+        3,
+        29,
+        27
+      ],
+      [
+        27,
+        26,
+        22,
+        14,
+        10,
+        4,
+        30,
+        28
+      ],
+      [
+        28,
+        27,
+        23,
+        15,
+        11,
+        5,
+        31,
+        29
+      ],
+      [
+        29,
+        28,
+        24,
+        16,
+        12,
+        6,
+        0,
+        30
+      ],
+      [
+        30,
+        29,
+        25,
+        17,
+        13,
+        7,
+        1,
+        31
+      ],
+      [
+        31,
+        30,
+        26,
+        18,
+        14,
+        8,
+        2,
+        0
+      ]
+    ],
+    "note": "RTL vectors use the current integer rail affine contract. This preserves global-source PageRank topology and same-shell control, but it is not yet the final fractional PageRank datapath."
+  },
+  "delay_metadata": {
+    "formula": "max(2, ceil(log2(max_i(A_i+B_i)/3))+3)",
+    "row_bounds": [
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375,
+      0.951507568359375
+    ],
+    "max_bound": 0.951507568359375,
+    "derived_delay": 2,
+    "online_delay": 2,
+    "forced_delay": 2,
+    "frac_bits": 15,
+    "data_width": 16,
+    "bit_width": 14,
+    "bias_width": 16,
+    "scale_q": 32768,
+    "teleport_lsb": 51,
+    "max_coeff_abs_q": 3891,
+    "max_coeff_sum_q": 31128,
+    "cmax_q": 63896,
+    "umax_q": 15974,
+    "mmax_q": 63896,
+    "bit_width_min": 12,
+    "bias_width_min": 6,
+    "acc_width_min": 17,
+    "acc_width_impl": 36
+  },
+  "iterations": [
+    {
+      "iter": 0,
+      "clusters": [
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            85,
+            85,
+            85,
+            85
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 23925738098196565,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        208,
+        208,
+        208,
+        208,
+        208,
+        208,
+        208,
+        208
+      ],
+      "global_l1_delta": 1664,
+      "global_linf_delta": 51,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 1,
+      "clusters": [
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        },
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        },
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        },
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        },
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        },
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        },
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        },
+        {
+          "state_p_rows": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "block_bounds": [
+            49,
+            49,
+            49,
+            49
+          ],
+          "max_error": 196,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 28147927174348900,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13792484315430961,
+            "block_bounds": 13792484315430961
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        196,
+        196,
+        196,
+        196,
+        196,
+        196,
+        196,
+        196
+      ],
+      "global_l1_delta": 1568,
+      "global_linf_delta": 48,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 2,
+      "clusters": [
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        },
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        },
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        },
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        },
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        },
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        },
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        },
+        {
+          "state_p_rows": [
+            146,
+            146,
+            146,
+            146
+          ],
+          "state_n_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "abs_upper_rows": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "block_bounds": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "max_error": 188,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 41095973674549394,
+            "state_n_rows": 281479271743489,
+            "abs_upper_rows": 13229525771943983,
+            "block_bounds": 13229525771943983
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        188,
+        188,
+        188,
+        188,
+        188,
+        188,
+        188,
+        188
+      ],
+      "global_l1_delta": 1504,
+      "global_linf_delta": 46,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 3,
+      "clusters": [
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        },
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        },
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        },
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        },
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        },
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        },
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        },
+        {
+          "state_p_rows": [
+            193,
+            193,
+            193,
+            193
+          ],
+          "state_n_rows": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "abs_upper_rows": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "block_bounds": [
+            45,
+            45,
+            45,
+            45
+          ],
+          "max_error": 180,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 54325499446493377,
+            "state_n_rows": 1125917086973956,
+            "abs_upper_rows": 12666567228457005,
+            "block_bounds": 12666567228457005
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180
+      ],
+      "global_l1_delta": 1440,
+      "global_linf_delta": 44,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 4,
+      "clusters": [
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        },
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        },
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        },
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        },
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        },
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        },
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        },
+        {
+          "state_p_rows": [
+            265,
+            265,
+            265,
+            265
+          ],
+          "state_n_rows": [
+            34,
+            34,
+            34,
+            34
+          ],
+          "abs_upper_rows": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "block_bounds": [
+            43,
+            43,
+            43,
+            43
+          ],
+          "max_error": 172,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 74592007012024585,
+            "state_n_rows": 9570295239278626,
+            "abs_upper_rows": 12103608684970027,
+            "block_bounds": 12103608684970027
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        172,
+        172,
+        172,
+        172,
+        172,
+        172,
+        172,
+        172
+      ],
+      "global_l1_delta": 1376,
+      "global_linf_delta": 42,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 5,
+      "clusters": [
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        },
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        },
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        },
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        },
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        },
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        },
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        },
+        {
+          "state_p_rows": [
+            272,
+            272,
+            272,
+            272
+          ],
+          "state_n_rows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "abs_upper_rows": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "block_bounds": [
+            40,
+            40,
+            40,
+            40
+          ],
+          "max_error": 160,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 76562361914229008,
+            "state_n_rows": 562958543486978,
+            "abs_upper_rows": 11259170869739560,
+            "block_bounds": 11259170869739560
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "global_l1_delta": 1280,
+      "global_linf_delta": 39,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 6,
+      "clusters": [
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        },
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        },
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        },
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        },
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        },
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        },
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        },
+        {
+          "state_p_rows": [
+            324,
+            324,
+            324,
+            324
+          ],
+          "state_n_rows": [
+            17,
+            17,
+            17,
+            17
+          ],
+          "abs_upper_rows": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "block_bounds": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "max_error": 152,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 91199284044890436,
+            "state_n_rows": 4785147619639313,
+            "abs_upper_rows": 10696212326252582,
+            "block_bounds": 10696212326252582
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        152,
+        152,
+        152,
+        152,
+        152,
+        152,
+        152,
+        152
+      ],
+      "global_l1_delta": 1216,
+      "global_linf_delta": 37,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 7,
+      "clusters": [
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        },
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        },
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        },
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        },
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        },
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        },
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        },
+        {
+          "state_p_rows": [
+            425,
+            425,
+            425,
+            425
+          ],
+          "state_n_rows": [
+            82,
+            82,
+            82,
+            82
+          ],
+          "abs_upper_rows": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "block_bounds": [
+            37,
+            37,
+            37,
+            37
+          ],
+          "max_error": 148,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 119628690490982825,
+            "state_n_rows": 23081300282966098,
+            "abs_upper_rows": 10414733054509093,
+            "block_bounds": 10414733054509093
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        148,
+        148,
+        148,
+        148,
+        148,
+        148,
+        148,
+        148
+      ],
+      "global_l1_delta": 1184,
+      "global_linf_delta": 36,
+      "converged": 0,
+      "continue": 1
+    }
+  ],
+  "conv_iterations": [
+    {
+      "iter": 0,
+      "clusters": [
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        },
+        {
+          "state_p_rows": [
+            51,
+            51,
+            51,
+            51
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "block_bounds": [
+            52,
+            52,
+            52,
+            52
+          ],
+          "max_error": 208,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 14355442858917939,
+            "state_n_rows": 0,
+            "abs_upper_rows": 14636922130661428,
+            "block_bounds": 14636922130661428
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        208,
+        208,
+        208,
+        208,
+        208,
+        208,
+        208,
+        208
+      ],
+      "global_l1_delta": 1664,
+      "global_linf_delta": 51,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 1,
+      "clusters": [
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        },
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        },
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        },
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        },
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        },
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        },
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        },
+        {
+          "state_p_rows": [
+            75,
+            75,
+            75,
+            75
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "block_bounds": [
+            25,
+            25,
+            25,
+            25
+          ],
+          "max_error": 100,
+          "certified": 0,
+          "packed": {
+            "state_p_rows": 21110945380761675,
+            "state_n_rows": 0,
+            "abs_upper_rows": 7036981793587225,
+            "block_bounds": 7036981793587225
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "global_l1_delta": 800,
+      "global_linf_delta": 24,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 2,
+      "clusters": [
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            83,
+            83,
+            83,
+            83
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 23362779554709587,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36
+      ],
+      "global_l1_delta": 288,
+      "global_linf_delta": 8,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 3,
+      "clusters": [
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "block_bounds": [
+            9,
+            9,
+            9,
+            9
+          ],
+          "max_error": 36,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 2533313445691401,
+            "block_bounds": 2533313445691401
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36
+      ],
+      "global_l1_delta": 288,
+      "global_linf_delta": 8,
+      "converged": 0,
+      "continue": 1
+    },
+    {
+      "iter": 4,
+      "clusters": [
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "global_l1_delta": 32,
+      "global_linf_delta": 0,
+      "converged": 1,
+      "continue": 0
+    },
+    {
+      "iter": 5,
+      "clusters": [
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "global_l1_delta": 32,
+      "global_linf_delta": 0,
+      "converged": 1,
+      "continue": 0
+    },
+    {
+      "iter": 6,
+      "clusters": [
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "global_l1_delta": 32,
+      "global_linf_delta": 0,
+      "converged": 1,
+      "continue": 0
+    },
+    {
+      "iter": 7,
+      "clusters": [
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        },
+        {
+          "state_p_rows": [
+            91,
+            91,
+            91,
+            91
+          ],
+          "state_n_rows": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "abs_upper_rows": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "block_bounds": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "max_error": 4,
+          "certified": 1,
+          "packed": {
+            "state_p_rows": 25614613728657499,
+            "state_n_rows": 0,
+            "abs_upper_rows": 281479271743489,
+            "block_bounds": 281479271743489
+          }
+        }
+      ],
+      "local_l1_by_cluster": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "global_l1_delta": 32,
+      "global_linf_delta": 0,
+      "converged": 1,
+      "continue": 0
+    }
+  ]
+}

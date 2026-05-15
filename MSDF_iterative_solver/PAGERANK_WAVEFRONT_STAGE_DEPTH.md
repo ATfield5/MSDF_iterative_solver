@@ -192,8 +192,46 @@ K=4 standalone RTL 已满足：
 
 runtime acceptance 已完成：
 
-- strict prior K=4 wavefront 已接入 runtime shell，入口为 `ROW_DATAPATH_MODE=7`；
+- strict prior K=4 wavefront 已接入 runtime shell，本文统一称为 `P3`；
 - last-stage L1 certification 已按 $x^{(k+4)}-x^{(k+3)}$ 接入，避免把 4 个 fused iteration 的总变化量误当收敛 residual；
 - 同 shell 对比见 `generated/pagerank_fractional_same_scope_eval.md`：P3 为 `compute=70 / issue=14 / cert_wait=56 / observed_total=150`，P4 timing-clean conventional fractional 为 `compute=44 / issue=4 / cert_wait=40 / observed_total=143`。性能主表只使用 `compute=issue+cert_wait`，配置/state preload/window load 单独剥离。
 
 当前结论：strict prior K=4 wavefront 证明了原始 online operator 的 committed digit 可以直接级联，并把 P3 prior digit-stream single-stage 从 `168` compute cycles 压到 `70` compute cycles；但它还没有击败 P4 timing-clean conventional fractional 的 `44` compute cycles。因此下一步不能只扩 K，而应拆解 operator feed/capture/flush、last-delta 和 certification 等核心等待，并评估 P3 是否能在资源/功耗上给出足够硬的优势。
+
+
+## Continuous Feedback Checkpoint
+
+固定 K-stage super-step 之后，当前新增 continuous feedback checkpoint：
+
+```bash
+conda run -n qas python MSDF_iterative_solver/run_prior_fractional_feedback_eval.py
+```
+
+生成报告：
+
+```text
+MSDF_iterative_solver/generated/prior_fractional_feedback_eval.md
+```
+
+该 checkpoint 仍然使用原始 `MSDF_MUL_ADD_8`，不使用 PageRank 4-term experimental core。结构为：
+
+$$
+x^{(k)}\rightarrow x^{(k+K)}\rightarrow \text{feedback FIFO}\rightarrow x^{(k+2K)}
+$$
+
+当前结果摘要：
+
+| case | K | target supersteps | total cycles | final supersteps | feedback stall | converged stage |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| K2 feedback | 2 | 2 | 74 | 2 | 0 | n/a |
+| K4 feedback | 4 | 2 | 101 | 2 | 0 | observed stage 0 in second super-step |
+| K4 stage-L1 stop | 4 | 2 | 41 | 0 | 0 | 1 |
+
+工程含义：
+
+- feedback FIFO 存的是 committed digit packet，不是 full-word vector；
+- 每个 stage 完成一个 word 后必须做 local clear，因为原始 `MSDF_MUL_ADD_8` 的 residual state 不能跨 PageRank operation 复用；
+- K=2 需要检查下游 stage ready，否则 stage0 的下一段输出可能早于 stage1 清空；
+- stage-wise L1 已经能发现最早收敛 stage，后续接 runtime shell 时应把它作为 P3 的 stop/control 入口。
+
+4-term PageRank fractional core 现在只保留为 experimental resource-cleanup，不作为本文主线，也不进入默认 P3 结果。

@@ -136,27 +136,51 @@ module iter_prior_online_mma8_stream_stage_cluster #(
             assign w_bias_digit_n =
                 (w_operand_phase && i_valid_digit) ? w_bias_n_ext[bit_sel] : 1'b0;
 
-            iter_prior_online_mma8_row_kernel #(
-                .degree(degree),
-                .bit_width(data_width),
-                .digit_idx_width(digit_idx_width)
-            ) prior_row (
-                .i_clk(i_clk),
-                .i_rst(i_rst || i_clear),
-                .i_valid_digit(w_feed_active),
-                .i_digit_idx(w_operand_digit_idx),
-                .i_state_digit_p_terms(w_state_digit_p_terms),
-                .i_state_digit_n_terms(w_state_digit_n_terms),
-                .i_coeff_p_terms(w_coeff_p_ext),
-                .i_coeff_n_terms(w_coeff_n_ext),
-                .i_bias_digit_p(w_bias_digit_p),
-                .i_bias_digit_n(w_bias_digit_n),
-                .o_z_p(w_prior_z_p_rows[ri]),
-                .o_z_n(w_prior_z_n_rows[ri]),
-                .o_int(),
-                .o_unit(w_prior_unit_rows[ri]),
-                .o_frac(w_prior_frac_rows[ri])
-            );
+            if (degree <= 8) begin : gen_prior_mma8_row
+                iter_prior_online_mma8_row_kernel #(
+                    .degree(degree),
+                    .bit_width(data_width),
+                    .digit_idx_width(digit_idx_width)
+                ) prior_row (
+                    .i_clk(i_clk),
+                    .i_rst(i_rst || i_clear),
+                    .i_valid_digit(w_feed_active),
+                    .i_digit_idx(w_operand_digit_idx),
+                    .i_state_digit_p_terms(w_state_digit_p_terms),
+                    .i_state_digit_n_terms(w_state_digit_n_terms),
+                    .i_coeff_p_terms(w_coeff_p_ext),
+                    .i_coeff_n_terms(w_coeff_n_ext),
+                    .i_bias_digit_p(w_bias_digit_p),
+                    .i_bias_digit_n(w_bias_digit_n),
+                    .o_z_p(w_prior_z_p_rows[ri]),
+                    .o_z_n(w_prior_z_n_rows[ri]),
+                    .o_int(),
+                    .o_unit(w_prior_unit_rows[ri]),
+                    .o_frac(w_prior_frac_rows[ri])
+                );
+            end else begin : gen_prior_mma32_row
+                iter_prior_online_mma32_native_row_kernel #(
+                    .degree(degree),
+                    .bit_width(data_width),
+                    .digit_idx_width(digit_idx_width)
+                ) prior_row (
+                    .i_clk(i_clk),
+                    .i_rst(i_rst || i_clear),
+                    .i_valid_digit(w_feed_active),
+                    .i_digit_idx(w_operand_digit_idx),
+                    .i_state_digit_p_terms(w_state_digit_p_terms),
+                    .i_state_digit_n_terms(w_state_digit_n_terms),
+                    .i_coeff_p_terms(w_coeff_p_ext),
+                    .i_coeff_n_terms(w_coeff_n_ext),
+                    .i_bias_digit_p(w_bias_digit_p),
+                    .i_bias_digit_n(w_bias_digit_n),
+                    .o_z_p(w_prior_z_p_rows[ri]),
+                    .o_z_n(w_prior_z_n_rows[ri]),
+                    .o_int(),
+                    .o_unit(w_prior_unit_rows[ri]),
+                    .o_frac(w_prior_frac_rows[ri])
+                );
+            end
 
             assign o_commit_digit_idx_rows[(ri + 1) * digit_idx_width - 1 -:
                 digit_idx_width] = r_capture_idx;

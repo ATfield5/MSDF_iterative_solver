@@ -1,0 +1,47 @@
+{
+  "git_commit": "24bdc91531326314d71a18b4efff580e9bdbf7ae",
+  "rows": [
+    {
+      "entry": "Original paper integrated online inner product",
+      "id": "P0",
+      "paper_use": "prior-work reference; not directly comparable to full wavefront/runtime top",
+      "primary_data": "n=32,m=32: integrated 10194 LUT / 6153 FF; cascaded 11195 LUT / 7202 FF",
+      "scope": "operator-level only"
+    },
+    {
+      "entry": "Native serial-serial 32-input online operator",
+      "id": "P1",
+      "paper_use": "shows direct native32 scaling is resource-infeasible on U55C",
+      "primary_data": "K=4 degree32 DATA_WIDTH=32: 86 cycles; synth 1,438,937 LUT / 782,614 FF / 0 DSP",
+      "scope": "same-repo prior-style scalability baseline"
+    },
+    {
+      "entry": "Parallel-in online affine operator",
+      "id": "P2",
+      "paper_use": "operator contribution and online-delay reduction evidence",
+      "primary_data": "degree4 K=4: 50 cycles; routed-pass WNS 0.104 ns / 85373 LUT / 10831 FF / 0 DSP; degree8 optimized: routed-pass WNS 0.001 ns / 116070 LUT / 11811 FF / 0 DSP",
+      "scope": "operator/wavefront"
+    },
+    {
+      "entry": "Parallel-in digit-wavefront / feedback",
+      "id": "P3",
+      "paper_use": "main architecture contribution; dense32 needs route before timing claim",
+      "primary_data": "degree4 feedback: routed-pass WNS 0.040 ns / 116066 LUT / 27089 FF / 0 DSP; dense32 88 cycles/8 iter synth-only",
+      "scope": "wavefront-level"
+    },
+    {
+      "entry": "Conventional DSP-MAC affine baseline",
+      "id": "P4",
+      "paper_use": "fair FPGA arithmetic baseline; not CPU and not prior-online",
+      "primary_data": "one-stage 32-row x 8-MAC degree8/physical8: routed-pass WNS 1.284 ns / 62877 LUT / 24644 FF / 1024 DSP",
+      "scope": "hardware arithmetic baseline"
+    },
+    {
+      "entry": "NumPy/OpenBLAS 32-thread",
+      "id": "CPU",
+      "paper_use": "application reference only; no LUT/DSP comparison",
+      "primary_data": "kernel 1.365 Miter/s on Ryzen 9 9950X",
+      "scope": "software application baseline"
+    }
+  ]
+}

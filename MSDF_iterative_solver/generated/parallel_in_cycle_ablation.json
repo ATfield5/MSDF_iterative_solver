@@ -1,0 +1,90 @@
+{
+  "clock_hz_for_hw_cycle_model": 200000000.0,
+  "git_commit": "24bdc91531326314d71a18b4efff580e9bdbf7ae",
+  "rows": [
+    {
+      "cycles": 86,
+      "cycles_per_iter": 21.5,
+      "degree": 32,
+      "gterm_ops_per_s_at_200mhz": 9.525581395348837,
+      "iterations": 4,
+      "iterations_per_s_at_200mhz": 9302325.581395349,
+      "name": "P1 native serial-serial prior32",
+      "scope": "measured RTL sim, standalone K=4",
+      "status": "PASS; not routed; native32 synth exceeds U55C LUT budget",
+      "term_ops_per_s_at_200mhz": 9525581395.348837
+    },
+    {
+      "cycles": 50,
+      "cycles_per_iter": 12.5,
+      "degree": 4,
+      "gterm_ops_per_s_at_200mhz": 2.048,
+      "iterations": 4,
+      "iterations_per_s_at_200mhz": 16000000.0,
+      "name": "P2 parallel-in online wavefront",
+      "scope": "measured RTL sim, degree4 default",
+      "status": "PASS",
+      "term_ops_per_s_at_200mhz": 2048000000.0
+    },
+    {
+      "cycles": 94,
+      "cycles_per_iter": 11.75,
+      "degree": 4,
+      "gterm_ops_per_s_at_200mhz": 2.178723404255319,
+      "iterations": 8,
+      "iterations_per_s_at_200mhz": 17021276.59574468,
+      "name": "P3 parallel-in feedback",
+      "scope": "measured RTL sim, degree4 default",
+      "status": "PASS",
+      "term_ops_per_s_at_200mhz": 2178723404.255319
+    },
+    {
+      "cycles": 88,
+      "cycles_per_iter": 11.0,
+      "degree": 32,
+      "gterm_ops_per_s_at_200mhz": 18.61818181818182,
+      "iterations": 8,
+      "iterations_per_s_at_200mhz": 18181818.181818184,
+      "name": "P3 dense32 feedback",
+      "scope": "measured RTL sim + synth-only resource",
+      "status": "PASS; synth-only",
+      "term_ops_per_s_at_200mhz": 18618181818.18182
+    },
+    {
+      "cycles": 17,
+      "cycles_per_iter": 4.25,
+      "degree": 4,
+      "gterm_ops_per_s_at_200mhz": 6.023529411764706,
+      "iterations": 4,
+      "iterations_per_s_at_200mhz": 47058823.52941176,
+      "name": "P4 conventional DSP-MAC",
+      "scope": "measured RTL sim, one-stage degree4/physical8",
+      "status": "PASS; not same physical wavefront shape",
+      "term_ops_per_s_at_200mhz": 6023529411.764706
+    },
+    {
+      "cycles": 17,
+      "cycles_per_iter": 4.25,
+      "degree": 8,
+      "gterm_ops_per_s_at_200mhz": 12.047058823529412,
+      "iterations": 4,
+      "iterations_per_s_at_200mhz": 47058823.52941176,
+      "name": "P4 conventional DSP-MAC degree8/physical8",
+      "scope": "measured RTL sim, one-stage degree8/physical8",
+      "status": "PASS; same 8-MAC/row physical datapath as routed P4 degree8",
+      "term_ops_per_s_at_200mhz": 12047058823.529411
+    },
+    {
+      "cycles": "NA",
+      "cycles_per_iter": "NA",
+      "degree": 32,
+      "gterm_ops_per_s_at_200mhz": 1.3976412888772805,
+      "iterations": "measured",
+      "iterations_per_s_at_200mhz": 1364884.0711692192,
+      "name": "CPU NumPy/OpenBLAS 32-thread",
+      "scope": "CPU measured kernel",
+      "status": "software reference; no FPGA resource comparison",
+      "term_ops_per_s_at_200mhz": 1397641288.8772805
+    }
+  ]
+}

@@ -13,6 +13,9 @@ logs/
 *.jou
 *.str
 *.tmp
+clockInfo.txt
+*_CongestedCLBsAndNets.txt
+*.pdf
 
 # Vivado/Xilinx generated work directories and build artifacts
 .Xil/
@@ -38,3 +41,6 @@ MSDF_iterative_solver/generated/vivado_*/
 !MSDF_iterative_solver/generated/*.json
 !MSDF_iterative_solver/generated/*.memh
 !MSDF_iterative_solver/generated/rtl_vectors/**
+
+# Local literature cache (not versioned)
+external/

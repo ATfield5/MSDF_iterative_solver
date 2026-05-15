@@ -17,9 +17,17 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
     localparam integer NUM_CLUSTERS = 8;
     localparam integer ROWS_PER_CLUSTER = 4;
     localparam integer TOTAL_ROWS = NUM_CLUSTERS * ROWS_PER_CLUSTER;
+`ifdef PRIOR_WAVEFRONT_DEGREE_VALUE
+    localparam integer DEGREE = `PRIOR_WAVEFRONT_DEGREE_VALUE;
+`else
     localparam integer DEGREE = 4;
+`endif
+`ifdef PRIOR_WAVEFRONT_BIT_WIDTH_VALUE
+    localparam integer BIT_WIDTH = `PRIOR_WAVEFRONT_BIT_WIDTH_VALUE;
+`else
     localparam integer BIT_WIDTH = 11;
-    localparam integer DATA_WIDTH = 14;
+`endif
+    localparam integer DATA_WIDTH = BIT_WIDTH + 3;
     localparam integer BIAS_WIDTH = BIT_WIDTH + 2;
     localparam integer SRC_IDX_WIDTH = 5;
     localparam integer VALID_WIDTH = ROWS_PER_CLUSTER * DEGREE;
@@ -29,7 +37,16 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
     localparam integer TEMPLATE_PAYLOAD_WIDTH =
         VALID_WIDTH + SRC_WIDTH + 2 * COEFF_TERMS_WIDTH + 2 * BIAS_VEC_WIDTH;
     localparam integer DIGIT_IDX_WIDTH = $clog2(DATA_WIDTH);
+`ifdef PRIOR_WAVEFRONT_TOLERANCE_VALUE
+    localparam integer PRIOR_TOLERANCE = `PRIOR_WAVEFRONT_TOLERANCE_VALUE;
+`else
     localparam integer PRIOR_TOLERANCE = 4;
+`endif
+`ifdef PRIOR_WAVEFRONT_USE_MMA4_VALUE
+    localparam integer USE_MMA4_FRAC_CORE = `PRIOR_WAVEFRONT_USE_MMA4_VALUE;
+`else
+    localparam integer USE_MMA4_FRAC_CORE = 0;
+`endif
 
 `include "iter_tb_signed_digit_reconstruct.vh"
 
@@ -117,6 +134,7 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
         .bias_width(BIAS_WIDTH),
         .src_idx_width(SRC_IDX_WIDTH),
         .capture_unit(0),
+        .use_mma4_frac_core(USE_MMA4_FRAC_CORE),
         .digit_idx_width(DIGIT_IDX_WIDTH)
     ) dut (
         .i_clk(i_clk),
@@ -152,7 +170,7 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
             capture_count <= 0;
             captured_p_rows <= {TOTAL_ROWS * DATA_WIDTH{1'b0}};
             captured_n_rows <= {TOTAL_ROWS * DATA_WIDTH{1'b0}};
-        end else if (w_final_valid_rows[0]) begin
+        end else if (w_final_valid_rows[0] && (capture_count < DATA_WIDTH)) begin
             bit_sel = DATA_WIDTH - 1 - w_final_digit_idx_rows[DIGIT_IDX_WIDTH - 1 : 0];
             for (ri = 0; ri < TOTAL_ROWS; ri = ri + 1) begin
                 captured_p_rows[ri * DATA_WIDTH + bit_sel] <= w_final_digit_p_rows[ri];
@@ -171,12 +189,27 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
     end
 
     initial begin
+`ifdef PRIOR_WAVEFRONT_TEMPLATE_MEMH
+        $readmemh(`PRIOR_WAVEFRONT_TEMPLATE_MEMH,
+            template_mem);
+`else
         $readmemh("MSDF_iterative_solver/generated/rtl_vectors/pagerank32_global_prior_fractional/templates.memh",
             template_mem);
+`endif
+`ifdef PRIOR_WAVEFRONT_GOLD_STATE_P_MEMH
+        $readmemh(`PRIOR_WAVEFRONT_GOLD_STATE_P_MEMH,
+            gold_state_p_mem);
+`else
         $readmemh("MSDF_iterative_solver/generated/rtl_vectors/pagerank32_global_prior_fractional/gold_state_p_iters.memh",
             gold_state_p_mem);
+`endif
+`ifdef PRIOR_WAVEFRONT_GOLD_STATE_N_MEMH
+        $readmemh(`PRIOR_WAVEFRONT_GOLD_STATE_N_MEMH,
+            gold_state_n_mem);
+`else
         $readmemh("MSDF_iterative_solver/generated/rtl_vectors/pagerank32_global_prior_fractional/gold_state_n_iters.memh",
             gold_state_n_mem);
+`endif
 
         i_clk = 1'b0;
         i_rst = 1'b1;
@@ -256,7 +289,7 @@ module tb_iter_prior_online_mma8_global_wavefront_top;
             end
         end
 
-        $display("PASS tb_iter_prior_online_mma8_global_wavefront_top");
+        $display("PASS tb_iter_prior_online_mma8_global_wavefront_top use_mma4=%0d", USE_MMA4_FRAC_CORE);
         $display("COUNTERS prior_wavefront K=%0d total=%0d capture=%0d stage_counts=%h overlap=%b",
             NUM_STAGES,
             cycle_count,

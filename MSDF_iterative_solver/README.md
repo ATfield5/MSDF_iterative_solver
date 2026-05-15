@@ -19,6 +19,76 @@ $$
 
 本方向的核心判断是：MSDF / online arithmetic 适合高维、流式、归约主导、可融合 operator boundary 的线性核；不适合作为独立非线性函数核的论文主线。
 
+
+## Current Parallel-In Operator Branch: P3-SP
+
+P3-SP 是当前新增的底层算子优化分支：系数矩阵仍由外部 template 输入，但以 parallel fixed-point word 进入 online MAC；state 继续以 MSDF digit stream 输入。该分支的目标是把原始 serial-serial inner-product delay 从
+
+$$
+\delta_{\mathrm{SS}}=\left\lceil\log_2\frac{2n+1}{3}\right\rceil+3
+$$
+
+替换为 PageRank bound-aware parallel-in delay：
+
+$$
+\delta_{\mathrm{SP}}=\max\left(2,\left\lceil\log_2\frac{\max_i(A_i+B_i)}{3}\right\rceil+3\right)
+$$
+
+索引：
+
+- [`PAPER_RESULTS_INDEX.md`](./PAPER_RESULTS_INDEX.md)
+- [`PARALLEL_IN_OPERATOR_PAPER_MATH.md`](./PARALLEL_IN_OPERATOR_PAPER_MATH.md)
+- [`PARALLEL_IN_ONLINE_DELAY_DERIVATION.md`](./PARALLEL_IN_ONLINE_DELAY_DERIVATION.md)
+- [`BOUNDED_ESTIMATE_SELECTOR.md`](./BOUNDED_ESTIMATE_SELECTOR.md)
+- [`run_parallel_in_bound_sweep.py`](./run_parallel_in_bound_sweep.py)
+- [`run_parallel_in_paper_reports.py`](./run_parallel_in_paper_reports.py)
+- [`make_pagerank_parallel_in_fractional_vectors.py`](./make_pagerank_parallel_in_fractional_vectors.py)
+- [`prior_rtl/iter_parallel_in_online_mma8_frac_core.v`](./prior_rtl/iter_parallel_in_online_mma8_frac_core.v)
+- [`prior_rtl/iter_parallel_in_conv_mma8_global_wavefront_top.v`](./prior_rtl/iter_parallel_in_conv_mma8_global_wavefront_top.v)
+- [`run_parallel_in_fractional_eval.py`](./run_parallel_in_fractional_eval.py)
+- [`run_parallel_in_route_sweep.py`](./run_parallel_in_route_sweep.py)
+- [`generated/parallel_in_fractional_eval.md`](./generated/parallel_in_fractional_eval.md)
+- [`generated/parallel_in_route_sweep.md`](./generated/parallel_in_route_sweep.md)
+- [`generated/parallel_in_dense32_eval.md`](./generated/parallel_in_dense32_eval.md)
+- [`generated/parallel_in_bound_sweep.md`](./generated/parallel_in_bound_sweep.md)
+- [`generated/parallel_in_cycle_ablation.md`](./generated/parallel_in_cycle_ablation.md)
+- [`generated/paper_baseline_fairness_table.md`](./generated/paper_baseline_fairness_table.md)
+
+当前 checkpoint：`pagerank32_global_parallel_in_fractional` 得到 `max_i(A_i+B_i)=0.85468750`，推导与实现的 `online_delay=2`；P3-SP 外部已改为 `DATA_WIDTH=32` 个 MSB-first signed digits。重新推导后的位宽为：`BIT_WIDTH_min=29`，工程取 `BIT_WIDTH=30`；`BIAS_WIDTH=32`；内部 residual accumulator 最小安全位宽 `ACC_WIDTH_min=33`，工程也取 `ACC_WIDTH=33`。这是 workload-specific 安全宽度，不降低外部 32-bit 输出精度；原 36-bit guard 版本功能正确但 feedback loop 在 U55C 5 ns 下只剩极小负 slack。K=4 standalone P3-SP wavefront Icarus 仿真通过，`observed total=50`，`capture=32`。
+
+P4-SP conventional baseline 已按当前口径改为一轮并行 row baseline：32 个 row lane 并行，每个 row lane 内有 8 个并行 `32 x 32` signed MAC slot，不做 K-stage 物理展开。公平功能测试中复用同一个 one-stage datapath 连续跑 4 轮，第一轮输入全 0，每轮输出回写作为下一轮输入；Icarus 结果为 `17` cycles。
+
+U55C 5 ns OOC route 已补，报告见 [`generated/parallel_in_route_sweep.md`](./generated/parallel_in_route_sweep.md)。当前 fast50 standalone P3-SP 保留 direct stage-to-stage digit cascade，只加入 contribution register，并把 contribution 生成器改成显式 balanced tree；standalone route 通过 5 ns：`WNS=+0.104 ns / 85373 LUT / 10831 FF / 7568 CARRY8 / 0 DSP / 0 BRAM / dynamic 0.966 W`。4-cycle feedback loop 在 core36 下只差极小负 slack，切到数学证明的 core33 后 route-clean：`WNS=+0.040 ns / 116066 LUT / 27089 FF / 9676 CARRY8 / 0 DSP / 0 BRAM / dynamic 1.749 W`。I=3 fast2 分支功能上能把 feedback 从 `94` cycles 压到 `88` cycles；exact threshold selector、feedback term preselect、valid/data decoupling、split bounded-estimate selector、PageRank 非负系数和非负 bias 专用路径后，route 从 `WNS=-2.303 ns` 改善到 `WNS=-0.121 ns / 92002 LUT / 22564 FF / 8140 CARRY8 / 0 DSP / dynamic 1.589 W`，但仍未过 U55C 5 ns，因此暂不进入主线。该优化保持 `88` cycles 和 `first_gap01=3` 不变，收益来自 PageRank transition coefficient 与 teleport/bias 项均非负，去掉了每个 term 的 `coeff_p-coeff_n` 减法和 bias 负分支。最新 redundant-residual 实验确认：carry-save residual rail 不能直接截高位做 selector，必须配套 canonical estimate residual；bit-exact PageRank32 最小通过设置为 `EST_FRAC_BITS=4 / EST_GUARD_BITS=26`，但 U55C 5 ns route 仍约 `WNS=-2.78 ns`，关键路径转移到 `r_w_est_norm[32]`，因此该分支不进入主线。新的 P4-SP one-stage parallel-row baseline 为 `WNS=+1.284 ns / 62877 LUT / 24644 FF / 8896 CARRY8 / 1024 DSP / dynamic 3.046 W`。因此这些行不再是同形状 latency-first 对比：P3-SP feedback 是 4-stage x 32-row online wavefront + FIFO/termination，P4-SP 是 1-stage x 32-row conventional datapath。
+
+验证入口：
+
+```bash
+conda run -n qas python MSDF_iterative_solver/run_parallel_in_fractional_eval.py
+```
+
+## Current Mainline: PageRank Digit-Wavefront Feedback
+
+当前主线不再优先做 term-slot 裁剪。P3 默认固定为原始 `MSDF_MUL_ADD_8` strict prior operator，并在 solver 层做 digit-wavefront：
+
+$$
+x^{(k)} \rightarrow x^{(k+K)} \rightarrow \text{feedback FIFO} \rightarrow x^{(k+2K)}
+$$
+
+新增连续反馈 checkpoint：
+
+- [`prior_rtl/iter_prior_online_mma8_global_feedback_top.v`](./prior_rtl/iter_prior_online_mma8_global_feedback_top.v)
+- [`tb/tb_iter_prior_online_mma8_global_feedback_top.v`](./tb/tb_iter_prior_online_mma8_global_feedback_top.v)
+- [`run_prior_fractional_feedback_eval.py`](./run_prior_fractional_feedback_eval.py)
+- [`generated/prior_fractional_feedback_eval.md`](./generated/prior_fractional_feedback_eval.md)
+
+该路径验证两件事：final-stage committed digit 通过 FIFO 回到 stage0，且每一级 stage 都能同步输出 PageRank L1 delta，用于发现最早收敛 stage。4-term PageRank fractional core 只保留为 experimental resource-cleanup，不进入默认 P3 主线，也不进入默认 sweep。
+
+验证入口：
+
+```bash
+conda run -n qas python MSDF_iterative_solver/run_prior_fractional_feedback_eval.py
+```
+
 ## Goal
 
 论文主张固定为：
@@ -550,6 +620,7 @@ $$
 - [`generated/wavefront_stage_depth_model.md`](./generated/wavefront_stage_depth_model.md)
 - [`generated/pagerank_wavefront_stage_sweep.md`](./generated/pagerank_wavefront_stage_sweep.md)
 - [`generated/prior_fractional_wavefront_sweep.md`](./generated/prior_fractional_wavefront_sweep.md)
+- [`generated/prior_fractional_feedback_eval.md`](./generated/prior_fractional_feedback_eval.md)
 - [`generated/pagerank_fractional_routed_backend_report.md`](./generated/pagerank_fractional_routed_backend_report.md)
 - [`PAGERANK_RUNTIME_OPERATION_SPEC.md`](./PAGERANK_RUNTIME_OPERATION_SPEC.md)
 
@@ -569,6 +640,7 @@ $$
 - [`model_wavefront_stage_depth.py`](./model_wavefront_stage_depth.py)
 - [`run_pagerank_wavefront_stage_sweep.py`](./run_pagerank_wavefront_stage_sweep.py)
 - [`run_prior_fractional_wavefront_sweep.py`](./run_prior_fractional_wavefront_sweep.py)
+- [`run_prior_fractional_feedback_eval.py`](./run_prior_fractional_feedback_eval.py)
 - [`synth_iter_dense_small_param_bank_top.tcl`](./synth_iter_dense_small_param_bank_top.tcl)
 - [`synth_iter_dense_small_runtime_top.tcl`](./synth_iter_dense_small_runtime_top.tcl)
 - [`rtl/online_const_coeff_contrib.v`](./rtl/online_const_coeff_contrib.v)
@@ -624,6 +696,7 @@ $$
 - [`rtl/iter_wavefront_superstep_cluster_state_top.v`](./rtl/iter_wavefront_superstep_cluster_state_top.v)
 - [`prior_rtl/iter_prior_online_mma8_stream_stage_cluster.v`](./prior_rtl/iter_prior_online_mma8_stream_stage_cluster.v)
 - [`prior_rtl/iter_prior_online_mma8_global_wavefront_top.v`](./prior_rtl/iter_prior_online_mma8_global_wavefront_top.v)
+- [`prior_rtl/iter_prior_online_mma8_global_feedback_top.v`](./prior_rtl/iter_prior_online_mma8_global_feedback_top.v)
 - [`rtl/iter_digit_serial_full_row_update_delta_slice.v`](./rtl/iter_digit_serial_full_row_update_delta_slice.v)
 - [`rtl/iter_digit_serial_full_row_cluster_delta_cert.v`](./rtl/iter_digit_serial_full_row_cluster_delta_cert.v)
 - [`rtl/iter_digit_stream_state_ping_pong_bank.v`](./rtl/iter_digit_stream_state_ping_pong_bank.v)
@@ -678,6 +751,7 @@ $$
 - [`tb/tb_iter_wavefront_commit_last_delta_cert_top.v`](./tb/tb_iter_wavefront_commit_last_delta_cert_top.v)
 - [`tb/tb_iter_wavefront_superstep_cluster_state_top.v`](./tb/tb_iter_wavefront_superstep_cluster_state_top.v)
 - [`tb/tb_iter_prior_online_mma8_global_wavefront_top.v`](./tb/tb_iter_prior_online_mma8_global_wavefront_top.v)
+- [`tb/tb_iter_prior_online_mma8_global_feedback_top.v`](./tb/tb_iter_prior_online_mma8_global_feedback_top.v)
 - [`tb/tb_iter_dense_runtime_wavefront_superstep_smoke.v`](./tb/tb_iter_dense_runtime_wavefront_superstep_smoke.v)
 - [`tb/tb_iter_dense_runtime_jacobi32_blockdiag_wavefront_superstep.v`](./tb/tb_iter_dense_runtime_jacobi32_blockdiag_wavefront_superstep.v)
 - [`tb/tb_iter_dense_runtime_jacobi32_halo_reg_wavefront_superstep.v`](./tb/tb_iter_dense_runtime_jacobi32_halo_reg_wavefront_superstep.v)
@@ -764,4 +838,4 @@ $$
 
 当前 solver-native digit-stream checkpoint 见 [`generated/solver_native_digit_stream_checkpoint.md`](./generated/solver_native_digit_stream_checkpoint.md)，runtime probe 见 [`generated/solver_native_mode3_runtime_probe.md`](./generated/solver_native_mode3_runtime_probe.md)。[`rtl/iter_streamed_bias_source.v`](./rtl/iter_streamed_bias_source.v) 已把 bias 从 full-word 每拍注入改成 MSB-first digit source；[`rtl/iter_const_coeff_digit_contrib_rail.v`](./rtl/iter_const_coeff_digit_contrib_rail.v) 为 solver-native magnitude p/n rail 新增固定系数 digit contribution，负 digit 使用 p/n 交换；[`rtl/iter_online_affine_no_bias_core.v`](./rtl/iter_online_affine_no_bias_core.v) 提供固定系数、无 bias 的 4-term contribution producer；[`rtl/iter_digit_stream_delta_bound.v`](./rtl/iter_digit_stream_delta_bound.v) 实现 old/new digit 的 prefix delta bound，并在 mode3 exact runtime 中启用 `final_only=1` 关闭未使用的中间 prefix upper-bound 逻辑；[`rtl/iter_solver_native_row_digit_engine.v`](./rtl/iter_solver_native_row_digit_engine.v) 把上述路径和 residual/output-update loop 串成 row-level digit-output boundary；[`rtl/iter_solver_native_commit_adapter.v`](./rtl/iter_solver_native_commit_adapter.v) 负责跳过固定 online latency digits，并只提交后续 `DATA_WIDTH` 个 state digits；[`rtl/iter_solver_native_cluster_digit_stream_top.v`](./rtl/iter_solver_native_cluster_digit_stream_top.v) 已把 replay mux、row digit engine、commit adapter 和 digit-stream state bank 封装成 runtime 可接入的 cluster shell；[`rtl/iter_solver_native_cluster_delta_cert_top.v`](./rtl/iter_solver_native_cluster_delta_cert_top.v) 进一步把 commit digit stream 接入 inline delta、runtime `tail_bound` 和 `block_H` certification。runtime mode3 现在复用顶层 `w_drv_x*` source-select streams，因此 halo-window replay 可以直接喂 solver-native row digit engine。`iter_solver_native_row_digit_engine` 的 runtime 默认已调成 `affine_guard_shift=7, skip_digits=4`；该组合来自 strict blockdiag+halo sweep，不减少 `DATA_WIDTH` 输入 digit，只减少必须丢弃的 online warm-up/drain digit。`sample_width=4..9` sweep 没有让更激进的 `guard=8, skip=3` 通过 strict blockdiag，因此剩余 drain 不是 selector sample 窗口问题。fast-done controller/result bypass 去掉了每轮 1 cycle 的纯控制尾巴，并同时应用到 conventional baseline。当前 directed Icarus 已覆盖 row 等价、单 row state commit/replay、多 row shared state bank commit/replay、inline delta bound、replayed-state identity update、非恒等 two-iteration affine cluster、cluster shell 两轮 affine、cluster shell inline delta/certification、runtime `ROW_DATAPATH_MODE=3` 两轮 smoke，以及 `8 clusters x 4 rows x 6 iterations` 的 strict full-digit blockdiag 和 halo-window runtime。strict blockdiag 与 no-register halo runtime 均为 `total=229 issue=66 cert_wait=120`，带 halo replay 输出寄存器的 timing-protection ablation 为 `total=241 issue=66 cert_wait=132`。当前 mode3 已证明 local-source blockdiag 和 radius-1 halo full-digit runtime 闭环；任意 global-source mode3 尚未接入，也不是当前论文优先路线。U55C NC8 5 ns OOC route 已通过，当前 no-register fast-done halo checkpoint 为 `26779 LUT / 9083 FF / 64 DSP / 9 BRAM / WNS +0.128 ns / dynamic 0.711 W`。相对同样 fast-done 的 cleaned conventional runtime，mode3 仍然更慢（`229` vs `157` cycles），但保持 `3x` DSP 降低、FF 和动态功耗更低，LUT 仍在同一量级；最新 worst path 仍是 `delta_bound/o_abs_upper_reg -> cluster_cert/cert_engine` 的 `block_H` DSP certification 路径，下一步应优化 state-ready/certification overlap，而不是继续微调 row digit engine。
 
-当前 wavefront super-step checkpoint 见 [`WAVEFRONT_DIGIT_STREAMING.md`](./WAVEFRONT_DIGIT_STREAMING.md)、[`PAGERANK_WAVEFRONT_STAGE_DEPTH.md`](./PAGERANK_WAVEFRONT_STAGE_DEPTH.md) 和 [`generated/wavefront_digit_stream_checkpoint.md`](./generated/wavefront_digit_stream_checkpoint.md)。[`rtl/iter_wavefront_superstep_cluster_state_top.v`](./rtl/iter_wavefront_superstep_cluster_state_top.v) 已把 `K` 个 solver stage 串成 committed digit wavefront，并用 `x^{(k+K)}-x^{(k+K-1)}` 做 last-delta certification；`ROW_DATAPATH_MODE=4` 已接入 `iter_dense_small_runtime_top`。当前已通过三个 runtime 检查：one-cluster smoke 为 `max_error=5 state=0a/05`；8-cluster blockdiag super-step 为 `total=135 issue=11 cert_wait=41 iter=1 conv_iter=1`；8-cluster registered halo-window super-step 为 `total=136 issue=11 cert_wait=42 iter=1 conv_iter=1`。两组多 cluster 测试都和第 4 轮 golden state/certification 对齐。为支持 blockdiag，committed wavefront 的内部 stage source 已从固定 radius-1 扩展为 template `src_row_idx` 选择；为支持 halo-window，mode4 已补跨 cluster inter-stage forwarding，把上一 stage 的 previous/current/next cluster committed digits 组成下一 stage 的 halo source window。最新 PageRank global-source stage sweep 见 [`generated/pagerank_wavefront_stage_sweep.md`](./generated/pagerank_wavefront_stage_sweep.md)：`K=2/3/4` 分别为 `121/128/135` cycles，`issue=11` 固定不随 `K` 增长，说明后级确实消费前级 committed digit stream，而不是等待 full word 重启。strict prior-fractional standalone sweep 见 [`generated/prior_fractional_wavefront_sweep.md`](./generated/prior_fractional_wavefront_sweep.md)：复用原始 `MSDF_MUL_ADD_8`，`K=2/3/4` 分别为 `36/46/56` cycles，`capture=14` 固定，最终 state 与 `pagerank32_global_prior_fractional` golden 在 `<=4 LSB` 内一致。strict prior-fractional runtime 现已接入 `ROW_DATAPATH_MODE=7`，同 fixture 报告见 [`generated/pagerank_fractional_same_scope_eval.md`](./generated/pagerank_fractional_same_scope_eval.md)：P3 K=4 wavefront 为 `compute=70 issue=14 cert_wait=56 observed_total=150`，相对 prior digit-stream single-stage `168` compute cycles 有 `2.400x` speedup。U55C routed 对比见 [`generated/pagerank_fractional_routed_backend_report.md`](./generated/pagerank_fractional_routed_backend_report.md)：P3 在 5 ns 下 timing-clean，`compute=70 / observed_total=150 / WNS +0.114 ns / 121364 LUT / 64706 FF / 64 DSP / 10.5 BRAM / dynamic 1.247 W`；reserved 8-slot timing-clean P4 conventional fractional 为 `compute=44 / observed_total=143 / WNS +0.052 ns / 59482 LUT / 23753 FF / 320 DSP / 10.5 BRAM / dynamic 2.390 W`。同一 registered halo-window fixture 下，四轮普通 mode3 为 `total=187 issue=44 cert_wait=84`，一轮 `K=4` mode4 super-step 为 `total=136 issue=11 cert_wait=42`，runtime speedup 为 `1.375x`。U55C NC8 5 ns OOC route 也已完成：mode3 registered halo 为 `26107 LUT / 9381 FF / 64 DSP / 9 BRAM / WNS +0.321 ns / dynamic 0.825 W`；mode4 wavefront 为 `40759 LUT / 13174 FF / 64 DSP / 9 BRAM / WNS +0.368 ns / dynamic 1.115 W`；启用 `cert_operand_pipeline=1` 后 mode4 为 `40789 LUT / 13182 FF / 64 DSP / 9 BRAM / WNS +0.667 ns / dynamic 1.052 W`，runtime 变为 `total=137`。结论是 wavefront/fusion 已证明能降低 online solver boundary 成本，strict prior runtime 也已证明可 route；但当前 P3 相比 reserved 8-slot timing-clean P4 仍是 `70` vs `44` compute cycles，优势在 `5x` DSP 降低和更低 dynamic power，劣势在 LUT/FF/latency。
+当前 wavefront super-step checkpoint 见 [`WAVEFRONT_DIGIT_STREAMING.md`](./WAVEFRONT_DIGIT_STREAMING.md)、[`PAGERANK_WAVEFRONT_STAGE_DEPTH.md`](./PAGERANK_WAVEFRONT_STAGE_DEPTH.md) 和 [`generated/wavefront_digit_stream_checkpoint.md`](./generated/wavefront_digit_stream_checkpoint.md)。[`rtl/iter_wavefront_superstep_cluster_state_top.v`](./rtl/iter_wavefront_superstep_cluster_state_top.v) 已把 `K` 个 solver stage 串成 committed digit wavefront，并用 `x^{(k+K)}-x^{(k+K-1)}` 做 last-delta certification；`ROW_DATAPATH_MODE=4` 已接入 `iter_dense_small_runtime_top`。当前已通过三个 runtime 检查：one-cluster smoke 为 `max_error=5 state=0a/05`；8-cluster blockdiag super-step 为 `total=135 issue=11 cert_wait=41 iter=1 conv_iter=1`；8-cluster registered halo-window super-step 为 `total=136 issue=11 cert_wait=42 iter=1 conv_iter=1`。两组多 cluster 测试都和第 4 轮 golden state/certification 对齐。为支持 blockdiag，committed wavefront 的内部 stage source 已从固定 radius-1 扩展为 template `src_row_idx` 选择；为支持 halo-window，mode4 已补跨 cluster inter-stage forwarding，把上一 stage 的 previous/current/next cluster committed digits 组成下一 stage 的 halo source window。最新 PageRank global-source stage sweep 见 [`generated/pagerank_wavefront_stage_sweep.md`](./generated/pagerank_wavefront_stage_sweep.md)：`K=2/3/4` 分别为 `121/128/135` cycles，`issue=11` 固定不随 `K` 增长，说明后级确实消费前级 committed digit stream，而不是等待 full word 重启。strict prior-fractional standalone sweep 见 [`generated/prior_fractional_wavefront_sweep.md`](./generated/prior_fractional_wavefront_sweep.md)：复用原始 `MSDF_MUL_ADD_8`，`K=2/3/4` 分别为 `36/46/56` cycles，`capture=14` 固定，最终 state 与 `pagerank32_global_prior_fractional` golden 在 `<=4 LSB` 内一致。strict prior-fractional runtime 现已作为 P3 fixed K=4 wavefront 接入，同 fixture 报告见 [`generated/pagerank_fractional_same_scope_eval.md`](./generated/pagerank_fractional_same_scope_eval.md)：P3 K=4 wavefront 为 `compute=70 issue=14 cert_wait=56 observed_total=150`，相对 prior digit-stream single-stage `168` compute cycles 有 `2.400x` speedup。U55C routed 对比见 [`generated/pagerank_fractional_routed_backend_report.md`](./generated/pagerank_fractional_routed_backend_report.md)：P3 在 5 ns 下 timing-clean，`compute=70 / observed_total=150 / WNS +0.114 ns / 121364 LUT / 64706 FF / 64 DSP / 10.5 BRAM / dynamic 1.247 W`；reserved 8-slot timing-clean P4 conventional fractional 为 `compute=44 / observed_total=143 / WNS +0.052 ns / 59482 LUT / 23753 FF / 320 DSP / 10.5 BRAM / dynamic 2.390 W`。同一 registered halo-window fixture 下，四轮普通 mode3 为 `total=187 issue=44 cert_wait=84`，一轮 `K=4` mode4 super-step 为 `total=136 issue=11 cert_wait=42`，runtime speedup 为 `1.375x`。U55C NC8 5 ns OOC route 也已完成：mode3 registered halo 为 `26107 LUT / 9381 FF / 64 DSP / 9 BRAM / WNS +0.321 ns / dynamic 0.825 W`；mode4 wavefront 为 `40759 LUT / 13174 FF / 64 DSP / 9 BRAM / WNS +0.368 ns / dynamic 1.115 W`；启用 `cert_operand_pipeline=1` 后 mode4 为 `40789 LUT / 13182 FF / 64 DSP / 9 BRAM / WNS +0.667 ns / dynamic 1.052 W`，runtime 变为 `total=137`。结论是 wavefront/fusion 已证明能降低 online solver boundary 成本，strict prior runtime 也已证明可 route；但当前 P3 相比 reserved 8-slot timing-clean P4 仍是 `70` vs `44` compute cycles，优势在 `5x` DSP 降低和更低 dynamic power，劣势在 LUT/FF/latency。 新增 standalone continuous feedback checkpoint 见 [`generated/prior_fractional_feedback_eval.md`](./generated/prior_fractional_feedback_eval.md)：K=4 连续两段 super-step 为 `total=101 / final_supersteps=2 / feedback_stall=0`，stage-wise L1 stop 测试得到 `converged_stage=1`；该结果尚未计入 same-shell runtime 主表。

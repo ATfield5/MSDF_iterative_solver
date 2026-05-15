@@ -14,6 +14,11 @@ module conv_signed_row_update_delta_slice_pipe #(
     parameter integer bias_width = bit_width + 2,
     parameter integer bound_width = bit_width + 5,
     parameter integer acc_width = 32,
+    // Full signed product guard width.  For the 32-bit P4-SP contract the
+    // reconstructed state is 33-bit signed, the coefficient is 31-bit signed,
+    // and 66 bits leaves two guard bits before fixed-point rounding.
+    parameter integer product_width =
+        ((data_width + bit_width + 4) > acc_width) ? (data_width + bit_width + 4) : acc_width,
     // Product scaling for fractional fixed-point baselines.  A value of zero
     // preserves the original integer-affine contract.  A positive value stores
     // round((state * coeff) / 2^product_shift) in the product pipeline stage.
@@ -46,7 +51,7 @@ module conv_signed_row_update_delta_slice_pipe #(
     reg r_valid_raw;
     reg r_valid_s1;
     reg r_valid_s2;
-    reg signed [acc_width - 1 : 0] r_product_raw [0 : degree - 1];
+    reg signed [product_width - 1 : 0] r_product_raw [0 : degree - 1];
     reg signed [acc_width - 1 : 0] r_bias_raw;
     reg signed [data_width : 0] r_old_state_raw;
     reg [bound_width - 1 : 0] r_tail_raw;
@@ -62,27 +67,31 @@ module conv_signed_row_update_delta_slice_pipe #(
     reg signed [bit_width : 0] coeff_term;
     reg signed [bias_width : 0] bias_term;
     reg signed [data_width : 0] old_state_term;
-    reg signed [acc_width - 1 : 0] product_stage;
+    reg signed [product_width - 1 : 0] product_stage;
     reg signed [acc_width - 1 : 0] sum_stage;
     reg signed [acc_width - 1 : 0] delta_stage;
     reg [acc_width - 1 : 0] abs_delta_stage;
     reg [acc_width - 1 : 0] abs_sum_stage;
     reg [acc_width - 1 : 0] state_max_stage;
 
-    function signed [acc_width - 1 : 0] round_shift_signed;
-        input signed [acc_width - 1 : 0] value;
-        reg [acc_width - 1 : 0] abs_value;
-        reg [acc_width - 1 : 0] rounded_abs;
+    function signed [acc_width - 1 : 0] round_shift_product;
+        input signed [product_width - 1 : 0] value;
+        reg [product_width - 1 : 0] abs_value;
+        reg [product_width - 1 : 0] rounded_abs;
+        reg [acc_width - 1 : 0] rounded_acc;
         begin
             if (product_shift <= 0) begin
-                round_shift_signed = value;
+                rounded_acc = value[acc_width - 1 : 0];
             end else begin
-                abs_value = value[acc_width - 1] ? (~value + 1'b1) : value;
-                rounded_abs = (abs_value + ({{(acc_width - 1){1'b0}}, 1'b1} << (product_shift - 1))) >> product_shift;
-                round_shift_signed = value[acc_width - 1]
-                    ? -$signed(rounded_abs)
-                    : $signed(rounded_abs);
+                abs_value = value[product_width - 1] ? (~value + 1'b1) : value;
+                rounded_abs =
+                    (abs_value + ({{(product_width - 1){1'b0}}, 1'b1} << (product_shift - 1))) >>
+                    product_shift;
+                rounded_acc = rounded_abs[acc_width - 1 : 0];
             end
+            round_shift_product = value[product_width - 1]
+                ? -$signed(rounded_acc)
+                : $signed(rounded_acc);
         end
     endfunction
 
@@ -106,7 +115,7 @@ module conv_signed_row_update_delta_slice_pipe #(
             o_sum_n <= {data_width{1'b0}};
             o_abs_upper <= {bound_width{1'b0}};
             for (ti = 0; ti < degree; ti = ti + 1) begin
-                r_product_raw[ti] <= {acc_width{1'b0}};
+                r_product_raw[ti] <= {product_width{1'b0}};
                 r_product[ti] <= {acc_width{1'b0}};
             end
         end else begin
@@ -127,11 +136,11 @@ module conv_signed_row_update_delta_slice_pipe #(
                 coeff_term =
                     $signed({1'b0, i_coeff_p_terms[(ti + 1) * bit_width - 1 -: bit_width]}) -
                     $signed({1'b0, i_coeff_n_terms[(ti + 1) * bit_width - 1 -: bit_width]});
-                product_stage = state_term * coeff_term;
+                product_stage = $signed(state_term) * $signed(coeff_term);
                 r_product_raw[ti] <= product_stage;
                 r_product[ti] <= (round_pipeline != 0)
-                    ? round_shift_signed(r_product_raw[ti])
-                    : round_shift_signed(product_stage);
+                    ? round_shift_product(r_product_raw[ti])
+                    : round_shift_product(product_stage);
             end
 
             r_bias_s1 <= (round_pipeline != 0)

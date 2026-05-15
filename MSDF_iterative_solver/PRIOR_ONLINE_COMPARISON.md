@@ -79,6 +79,20 @@ $$
 
 P2 是最关键的公平 baseline。它回答：如果只把原论文 integrated online operator 放进 solver shell，而不做 solver-level digit-stream iteration fusion，性能到哪里为止。
 
+## Parallel-In Operator Extension
+
+P3-SP 是相对原论文 operator 的新增分支，不属于原论文 reported baseline。原论文把两个 operand 都视为 MSDF digit stream，因此 inner-product driver 上界为 $2n+1$。P3-SP 针对 PageRank/affine iteration 的实际数据形态，把矩阵系数作为 external parallel word，只保留 state 的 MSDF digit stream，因此 driver 上界变为 $A_i+B_i$。
+
+该分支的可写贡献是：
+
+$$
+\text{generic serial-serial integrated inner product}
+\rightarrow
+\text{bound-aware parallel-in online affine MAC}
+$$
+
+当前已完成：数学推导文档、独立 fixture、P3-SP RTL core/stage/wavefront/feedback、P4-SP one-stage parallel-row conventional baseline、Icarus 功能 checkpoint 和 U55C OOC route。P3-SP 已迁移到 32-bit external digit stream：`DATA_WIDTH=32`、`BIT_WIDTH=30`、`BIAS_WIDTH=32`、内部 residual `ACC_WIDTH=33`，K=4 standalone wavefront 为 `50` cycles，K=4 feedback 两段 super-step 为 `94` cycles。P4-SP 使用 32 个并行 row lane，每个 row lane 内有 8 个并行 `32 x 32` signed MAC slot，不做 K-stage 物理展开；同一个 one-stage datapath 连续复用 4 轮，第一轮输入全 0，每轮输出回写作为下一轮输入，结果为 `17` cycles。当前 P3-SP feedback routed 版本为 `WNS=+0.040 ns / 116066 LUT / 27089 FF / 0 DSP / dynamic 1.749 W`；P4-SP one-stage parallel-row baseline 为 `WNS=+1.284 ns / 62877 LUT / 24644 FF / 1024 DSP / dynamic 3.046 W`。当前未完成：把 P3-SP 接入 runtime shell，并建立同 K 展开或同资源预算的系统级对比；所以还不能把 P3-SP K=4 feedback 和 P4-SP one-stage datapath 直接写成同口径 latency 胜负。
+
 ## What We Can Claim
 
 可以声称：

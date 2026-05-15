@@ -1,0 +1,8 @@
+name,scope,degree,iterations,cycles,cycles_per_iter,iterations_per_s_at_200mhz,term_ops_per_s_at_200mhz,gterm_ops_per_s_at_200mhz,status
+P1 native serial-serial prior32,"measured RTL sim, standalone K=4",32,4,86,21.5,9302325.581395349,9525581395.348837,9.525581395348837,PASS; not routed; native32 synth exceeds U55C LUT budget
+P2 parallel-in online wavefront,"measured RTL sim, degree4 default",4,4,50,12.5,16000000.0,2048000000.0,2.048,PASS
+P3 parallel-in feedback,"measured RTL sim, degree4 default",4,8,94,11.75,17021276.59574468,2178723404.255319,2.178723404255319,PASS
+P3 dense32 feedback,measured RTL sim + synth-only resource,32,8,88,11.0,18181818.181818184,18618181818.18182,18.61818181818182,PASS; synth-only
+P4 conventional DSP-MAC,"measured RTL sim, one-stage degree4/physical8",4,4,17,4.25,47058823.52941176,6023529411.764706,6.023529411764706,PASS; not same physical wavefront shape
+P4 conventional DSP-MAC degree8/physical8,"measured RTL sim, one-stage degree8/physical8",8,4,17,4.25,47058823.52941176,12047058823.529411,12.047058823529412,PASS; same 8-MAC/row physical datapath as routed P4 degree8
+CPU NumPy/OpenBLAS 32-thread,CPU measured kernel,32,measured,NA,NA,1364884.0711692192,1397641288.8772805,1.3976412888772805,software reference; no FPGA resource comparison
